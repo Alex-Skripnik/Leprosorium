@@ -6,10 +6,23 @@
     <br />
     Added at - <%= @row['created_date'] %>
 </p>
+<br />
+
+<h4>Comments: </h4>
+<br />
+<% @comments.each do |item|%>
+    <p>
+        <%= item['content_comment']%>
+        <br />
+        <span style="font-size: 75%; color: #999">Added at - <%= item['created_date_comment']%></span>
+    </p>
+    <hr />
+<% end %>
+
 
 <form action="/details/<%= @row['id'] %>" method="POST">
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
+        <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
         <textarea name="content_comment" class="form-control" id="exampleFormControlTextarea1" rows="3"
         placeholder="Type comment text here"></textarea>
     </div>
