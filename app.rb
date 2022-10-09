@@ -47,5 +47,8 @@ post '/new' do
     return erb :new
   end
 
+  # сохранение в БД
+  @db.execute 'insert into Pasts (content, created_date) values(?, datetime())', [content]
+
   erb "You typed: #{content}"
 end
