@@ -29,7 +29,10 @@ configure do
 end
 
 get '/' do
-  erb 'Can you handle a <a href="/secure/place">secret</a>?'
+  # выбираем список постов из БД
+  @results = @db.execute 'select * from Pasts order by id desc'
+  erb :index
+  
 end
 
 # обработчик get-запроса /new (браузер получает страницу с сервера)
@@ -50,5 +53,7 @@ post '/new' do
   # сохранение в БД
   @db.execute 'insert into Pasts (content, created_date) values(?, datetime())', [content]
 
-  erb "You typed: #{content}"
+  # перенаправление на страницу
+  redirect to '/'
+
 end
